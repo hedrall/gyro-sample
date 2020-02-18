@@ -90,7 +90,7 @@
     return newState;
   };
 
-  const getAcceleration = ( dimension: GyroDimension, deg: number ): number => {
+  const getAcceleration = ( deg: number ): number => {
     let angular = 0;
     // if ( dimension === 'alpha' ) {
       if ( 180 < deg && deg < 360 ) { // 右傾き
@@ -136,7 +136,7 @@
       const deg = state[DirectionMap[dimension]];
       console.log( 'deg', dimension, deg );
       const target = this.dimensions[dimension];
-      target.acceleration = - getAcceleration( dimension, deg );
+      target.acceleration = - getAcceleration( deg );
       console.log( 'acc', dimension, target.acceleration );
       target.speed += Math.round( target.acceleration * 100 ) / 100;
       target.coordinate += Math.round( target.speed );

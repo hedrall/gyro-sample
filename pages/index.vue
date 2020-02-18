@@ -62,6 +62,9 @@
     };
 
     mounted(): void {
+      if ( DeviceOrientationEvent ) {
+        DeviceOrientationEvent && (DeviceOrientationEvent as any).requestPermission && ( DeviceOrientationEvent as any ).requestPermission();
+      }
       window.addEventListener( "deviceorientation", this.handleOrientation, true );
 
       setInterval( () => {
@@ -80,7 +83,6 @@
     if ( newState.alpha < 0 ) {
       newState.alpha += 360;
     }
-    console.log( 'update state', beta, beta < 0 );
     if ( newState.beta < 0 ) {
       newState.beta += 360;
     }
@@ -129,10 +131,8 @@
 
     set( dimension: BallDimension, state: AngularState, limitLength: number ) {
       const deg = state[DirectionMap[dimension]];
-      console.log( 'deg', dimension, deg );
       const target = this.dimensions[dimension];
       target.acceleration = - getAcceleration( deg );
-      console.log( 'acc', dimension, target.acceleration );
       target.speed += Math.round( target.acceleration * 100 ) / 100;
       target.coordinate += Math.round( target.speed );
       if ( Math.abs( target.coordinate ) > limitLength ) {

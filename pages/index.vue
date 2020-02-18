@@ -71,7 +71,7 @@
         this.displayStatus = updatePositions( this.currentStatus, this.initStatus );
         this.ballStatus.set( 'x', this.displayStatus, this.boardLength / 2 - 10 );
         this.ballStatus.set( 'y', this.displayStatus, this.boardLength / 2 - 10 );
-      }, 40 );
+      }, 33 );
     }
   }
 
